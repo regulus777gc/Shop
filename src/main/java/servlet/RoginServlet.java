@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class RoginSerblet
+ * Servlet implementation class RoginServlet
  */
-@WebServlet("/RoginSerblet")
-public class RoginSerblet extends HttpServlet {
+@WebServlet("/RoginServlet")
+public class RoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RoginSerblet() {
+    public RoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
