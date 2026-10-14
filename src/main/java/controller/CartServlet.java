@@ -1,4 +1,4 @@
-package com.example.shop.controller;
+package controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.example.shop.dao.ProductDao;
-import com.example.shop.model.Cart;
-import com.example.shop.model.Product;
+
+import model.Cart;
+import model.Product;
 
 /**
  * Controller: カート。
