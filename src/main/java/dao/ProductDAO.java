@@ -48,9 +48,7 @@ public class ProductDAO {
         return productList;
     }
 
-    /**
-     * キーワード検索（商品名・説明文・カテゴリ）
-     */
+     //検索
     public List<Product> findByKeyword(String keyword) {
         List<Product> productList = new ArrayList<>();
         String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION "
@@ -81,9 +79,7 @@ public class ProductDAO {
         return productList;
     }
 
-    /**
-     * 単一商品の取得
-     */
+     //単一商品の取得
     public Product findById(int productId) {
         Product product = null;
         String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS WHERE PRODUCT_ID = ?";
@@ -106,9 +102,6 @@ public class ProductDAO {
         return product;
     }
 
-    /**
-     * 該当商品のスペック一覧（PRODUCT_SPECS）を取得するプライベートヘルパーメソッド
-     */
     private List<Product.Spec> findSpecsByProductId(Connection conn, int productId) throws SQLException {
         List<Product.Spec> specs = new ArrayList<>();
         String sql = "SELECT SPEC_LABEL, SPEC_VALUE FROM PRODUCT_SPECS WHERE PRODUCT_ID = ?";
