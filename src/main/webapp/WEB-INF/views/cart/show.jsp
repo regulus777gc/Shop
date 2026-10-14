@@ -9,9 +9,9 @@
 <title>カートの中身</title>
 </head>
 <body>
-<% List<String> books = (List<String>)request.getAttribute("books"); %>
-<% for(String title: books) { %>
-        <%= title %><br>
+<% List<String> 変数１ = (List<String>)request.getAttribute("ここに変数１"); %>
+<% for(String 変数２: 変数１) { %>
+        <%= 変数２ %><br>
     <% } %>
 </body>
 </html>
