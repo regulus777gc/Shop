@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>注文確定</title>
 </head>
 <body>
-
+<h1>注文が確定しました</h1>
+<p>発送、到着まで一週間ほどかかります。</p><br>
+<p>到着までしばらくお待ちください。</p>
 </body>
 </html>

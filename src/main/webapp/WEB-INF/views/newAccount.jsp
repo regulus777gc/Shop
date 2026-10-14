@@ -14,9 +14,8 @@
 <input type="radio" name="seibetu" value="she" >女性
 <input type="radio" name="seibetu" value="nazo" >その他、答えない
 年齢:<input type="text" name="age" ><br>
-住所:<input type="text" name="jyuusyo" ><br>
 <input type="submit" value="新規登録">
-<h2>内容は正しいですか？</h2>
+<h2>この内容で登録します</h2>
         <table id="result" class="result">
 </body>
 </html>
