@@ -1,6 +1,8 @@
 <!-- 商品一覧 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page import="model.Product" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,64 +15,64 @@
                 <div class="item">
                     <img src="ここに画像" alt="ここに商品の名前">
                     <p>
-                        ここに商品の名前 <br>
+                        <c:out value="${Product,name}"/><br>
                         <strong>ここに商品の金額</strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <br>
-                        <strong></strong>
+                         <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
                     </p>
                 </div>
             </div>
