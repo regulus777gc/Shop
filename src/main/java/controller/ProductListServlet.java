@@ -12,36 +12,35 @@ import jakarta.servlet.http.HttpServletResponse;
 import dao.ProductDAO;
 import model.Product;
 
-/**
- * Servlet implementation class ProductListServlet
- */
-@WebServlet("/ProductListServlet")
+@WebServlet("/products") 
 public class ProductListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
-	private final ProductDAO productDAO = new ProductDAO();
+    private final ProductDAO productDAO = new ProductDAO();
+
     public ProductListServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
-	protected void doGet(HttpServletRequest 
-			request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		String category = Views.param(request,"category");
-		String q = Views.param(request,"q");
-		String sort = Views.param(req, "sort");
-		
-	      List<Product> products = productDAO.search(category, q, sort);
 
-	        request.setAttribute("products", products);
-	        request.setAttribute("categories", Product.CATEGORIES);
-	        request.setAttribute("category", category);
-	        request.setAttribute("q", q);
-	        request.setAttribute("sort", sort.isEmpty() ? "def" : sort);
-	        Views.forward(request, response, "products/list");
-	    
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        String category = Views.param(request, "category");
+        String q = Views.param(request, "q");
+        String sort = Views.param(request, "sort");
+        
+        List<Product> products = productDAO.search(category, q, sort);
+
+        request.setAttribute("products", products);
+        request.setAttribute("categories", Product.CATEGORIES);
+        request.setAttribute("category", category);
+        request.setAttribute("q", q);
+        
+        String sortValue = (sort == null || sort.isEmpty()) ? "def" : sort;
+        request.setAttribute("sort", sortValue);
+        
+        // Viewへ転送
+        Views.forward(request, response, "products/list");
+        
+    }
 }

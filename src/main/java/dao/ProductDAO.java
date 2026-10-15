@@ -23,9 +23,7 @@ public class ProductDAO {
         }
     }
 
-    /**
-     * 商品一覧を取得する
-     */
+    //商品一覧を取得する
     public List<Product> findAll() {
         List<Product> productList = new ArrayList<>();
         String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS ORDER BY PRODUCT_ID";
@@ -79,7 +77,50 @@ public class ProductDAO {
         return productList;
     }
 
-     //単一商品の取得
+    public List<Product> search(String category, String keyword, String sort) {
+        List<Product> productList = new ArrayList<>();
+        StringBuilder sql = new StringBuilder(
+                "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS WHERE 1=1");
+        List<String> params = new ArrayList<>();
+
+        if (category != null && !category.isEmpty()) {
+            sql.append(" AND CATEGORY = ?");
+            params.add(category);
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND (NAME LIKE ? OR DESCRIPTION LIKE ?)");
+            params.add("%" + keyword + "%");
+            params.add("%" + keyword + "%");
+        }
+        if ("price_asc".equals(sort)) {
+            sql.append(" ORDER BY PRICE ASC, PRODUCT_ID");
+        } else if ("price_desc".equals(sort)) {
+            sql.append(" ORDER BY PRICE DESC, PRODUCT_ID");
+        } else {
+            sql.append(" ORDER BY PRODUCT_ID");
+        }
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+             PreparedStatement pStmt = conn.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                pStmt.setString(i + 1, params.get(i));
+            }
+            try (ResultSet rs = pStmt.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("PRODUCT_ID");
+                    List<Product.Spec> specs = findSpecsByProductId(conn, id);
+                    productList.add(createProductFromRs(rs, specs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return productList;
+    }
+
+    //単一商品の取得
     public Product findById(int productId) {
         Product product = null;
         String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS WHERE PRODUCT_ID = ?";
@@ -119,9 +160,7 @@ public class ProductDAO {
         return specs;
     }
 
-    /**
-     * ResultSet の現在行から Product インスタンスを生成する共通ヘルパーメソッド
-     */
+    //ResultSetの現在行からProductインスタンスを生成する共通ヘルパーメソッド
     private Product createProductFromRs(ResultSet rs, List<Product.Spec> specs) throws SQLException {
         int id = rs.getInt("PRODUCT_ID");
         String name = rs.getString("NAME");
