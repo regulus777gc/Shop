@@ -1,41 +1,57 @@
 package controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet implementation class Views
- */
-@WebServlet("/Views")
-public class Views extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Views() {
-        super();
-        // TODO Auto-generated constructor stub
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import model.Cart;
+
+/** Controller 共通の小さな道具。 */
+final class Views {
+
+    private Views() {
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /** /WEB-INF/views/<name>.jsp に処理を渡す。WEB-INF の中なので、URLで直接開かれることはない。 */
+    static void forward(HttpServletRequest req, HttpServletResponse resp, String name)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/views/" + name + ".jsp").forward(req, resp);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    static void redirect(HttpServletRequest req, HttpServletResponse resp, String path) throws IOException {
+        resp.sendRedirect(req.getContextPath() + path);
+    }
 
+    /** 次に表示する画面で1回だけ出すメッセージ。 */
+    static void flash(HttpServletRequest req, String message) {
+        req.getSession().setAttribute("flash", message);
+    }
+
+    /** セッションのカートを返す。まだなければ作る。 */
+    static Cart cartOf(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            session.setAttribute("cart", cart);
+        }
+        return cart;
+    }
+
+    static String param(HttpServletRequest req, String name) {
+        String value = req.getParameter(name);
+        return value == null ? "" : value.trim();
+    }
+
+    /** 整数に直す。数字でなければ null。 */
+    static Integer intParam(HttpServletRequest req, String name) {
+        try {
+            return Integer.valueOf(param(req, name));
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 }

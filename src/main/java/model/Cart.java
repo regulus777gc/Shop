@@ -18,6 +18,8 @@ public class Cart implements Serializable {
     public static final int SHIPPING_FEE = 550;
 
     private final Map<Integer, CartItem> items = new LinkedHashMap<>();
+    
+    
 
     /** 商品を1つ追加する。すでに入っていれば数量を1増やす。 */
     public void add(Product product) {
@@ -29,6 +31,7 @@ public class Cart implements Serializable {
         }
     }
 
+    
     /** 数量を変える。0以下なら削除する。 */
     public void setQuantity(int productId, int quantity) {
         CartItem item = items.get(productId);
