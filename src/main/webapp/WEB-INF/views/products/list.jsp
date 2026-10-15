@@ -9,7 +9,16 @@
 <meta charset="UTF-8">
 <title>商品一覧</title>
 </head>
-<body id="top">
+ <!--　ヘッダー　-->
+   <body id="top"
+        <header class="header">
+                <ul>
+                    <li><a href="show.jsp">カート</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!--ヘッダーここまで-->
+>
 <main>
 <div class="items">
                 <div class="item">
