@@ -19,18 +19,20 @@ import model.Product;
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private final ProductDAO productDao = new ProductDAO();
+	private final ProductDAO productDAO = new ProductDAO();
     public ProductListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest 
+			request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
 		String category = Views.param(request,"category");
 		String q = Views.param(request,"q");
 		String sort = Views.param(req, "sort");
 		
-	      List<Product> products = productDao.search(category, q, sort);
+	      List<Product> products = productDAO.search(category, q, sort);
 
 	        request.setAttribute("products", products);
 	        request.setAttribute("categories", Product.CATEGORIES);
