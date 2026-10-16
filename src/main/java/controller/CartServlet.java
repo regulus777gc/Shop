@@ -12,16 +12,15 @@ import dao.ProductDAO;
 import model.Cart;
 import model.Product;
 
-/**
- * Controller: カート。
- * GET  /cart                         … カートの表示
- * POST /cart  action=add|update|remove … 追加・数量変更・削除（終わったら /cart へリダイレクト）
- */
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
     private final ProductDAO productDao = new ProductDAO();
+=======
+    private final ProductDAO productDAO = new ProductDAO();
+>>>>>>> branch 'master' of https://github.com/regulus777gc/Shop.git
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -42,7 +41,7 @@ public class CartServlet extends HttpServlet {
 
         switch (Views.param(req, "action")) {
             case "add": {
-                Product product = productDao.findById(productId);
+                Product product = productDAO.findById(productId);
                 if (product == null) {
                     resp.sendError(HttpServletResponse.SC_NOT_FOUND);
                     return;

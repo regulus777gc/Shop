@@ -21,16 +21,6 @@ public class ProductListServlet extends HttpServlet {
     public ProductListServlet() {
         super();
     }
-<<<<<<< HEAD
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String category = Views.param(request,"category");
-		String q = Views.param(request,"q");
-		String sort = Views.param(request, "sort");
-		
-	      List<Product> products = productDao.search(category, q, sort);
-=======
->>>>>>> branch 'master' of https://github.com/regulus777gc/Shop.git
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {

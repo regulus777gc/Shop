@@ -1,176 +1,135 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import model.Product;
+import model.Product.Spec;
 
+/** DAO: products テーブルの読み書き。SQL はこのクラスにだけ書く。 */
 public class ProductDAO {
-    private final String JDBC_URL = "jdbc:h2:tcp://10.23.104.249/~/User";
-    private final String DB_USER = "sa";
-    private final String DB_PASS = "";
 
-    static {
-        try {
-            Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("JDBCドライバを読み込めませんでした", e);
-        }
-    }
+    private static final String COLUMNS =
+        "id, name, category, kind, tone, price, spec, description, specs";
 
-    //商品一覧を取得する
-    public List<Product> findAll() {
-        List<Product> productList = new ArrayList<>();
-        String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS ORDER BY PRODUCT_ID";
+    // 並べ替えは許可リスト方式（画面から来た文字列をSQLに直接入れない）
+    private static final Map<String, String> SORTS = Map.of(
+        "def", "id",
+        "low", "price ASC, id",
+        "high", "price DESC, id");
 
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-             PreparedStatement pStmt = conn.prepareStatement(sql);
-             ResultSet rs = pStmt.executeQuery()) {
-
-            while (rs.next()) {
-                int id = rs.getInt("PRODUCT_ID");
-                List<Product.Spec> specs = findSpecsByProductId(conn, id);
-
-                Product product = createProductFromRs(rs, specs);
-                productList.add(product);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return productList;
-    }
-
-     //検索
-    public List<Product> findByKeyword(String keyword) {
-        List<Product> productList = new ArrayList<>();
-        String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION "
-                   + "FROM PRODUCTS WHERE NAME LIKE ? OR DESCRIPTION LIKE ? OR CATEGORY LIKE ? "
-                   + "ORDER BY PRODUCT_ID";
-
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-             PreparedStatement pStmt = conn.prepareStatement(sql)) {
-
-            String searchPattern = "%" + keyword + "%";
-            pStmt.setString(1, searchPattern);
-            pStmt.setString(2, searchPattern);
-            pStmt.setString(3, searchPattern);
-
-            try (ResultSet rs = pStmt.executeQuery()) {
-                while (rs.next()) {
-                    int id = rs.getInt("PRODUCT_ID");
-                    List<Product.Spec> specs = findSpecsByProductId(conn, id);
-
-                    Product product = createProductFromRs(rs, specs);
-                    productList.add(product);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return productList;
-    }
-
-    public List<Product> search(String category, String keyword, String sort) {
-        List<Product> productList = new ArrayList<>();
-        StringBuilder sql = new StringBuilder(
-                "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS WHERE 1=1");
+    /** カテゴリ・商品名・並べ替えで検索する。category と q は null か空なら無視する。 */
+    public List<Product> search(String category, String q, String sort) {
+        StringBuilder sql = new StringBuilder("SELECT " + COLUMNS + " FROM products WHERE 1 = 1");
         List<String> params = new ArrayList<>();
 
-        if (category != null && !category.isEmpty()) {
-            sql.append(" AND CATEGORY = ?");
+        if (category != null && Product.CATEGORIES.contains(category)) {
+            sql.append(" AND category = ?");
             params.add(category);
         }
-        if (keyword != null && !keyword.isEmpty()) {
-            sql.append(" AND (NAME LIKE ? OR DESCRIPTION LIKE ?)");
-            params.add("%" + keyword + "%");
-            params.add("%" + keyword + "%");
+        if (q != null && !q.isEmpty()) {
+            sql.append(" AND name LIKE ? ESCAPE '\\'");
+            params.add("%" + escapeLike(q) + "%");
         }
-        if ("price_asc".equals(sort)) {
-            sql.append(" ORDER BY PRICE ASC, PRODUCT_ID");
-        } else if ("price_desc".equals(sort)) {
-            sql.append(" ORDER BY PRICE DESC, PRODUCT_ID");
-        } else {
-            sql.append(" ORDER BY PRODUCT_ID");
-        }
+        String order = SORTS.get(sort == null ? "def" : sort);
+        sql.append(" ORDER BY ").append(order != null ? order : SORTS.get("def"));
 
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-             PreparedStatement pStmt = conn.prepareStatement(sql.toString())) {
-
+        try (Connection c = Database.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql.toString())) {
             for (int i = 0; i < params.size(); i++) {
-                pStmt.setString(i + 1, params.get(i));
+                ps.setString(i + 1, params.get(i));
             }
-            try (ResultSet rs = pStmt.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery()) {
+                List<Product> list = new ArrayList<>();
                 while (rs.next()) {
-                    int id = rs.getInt("PRODUCT_ID");
-                    List<Product.Spec> specs = findSpecsByProductId(conn, id);
-                    productList.add(createProductFromRs(rs, specs));
+                    list.add(map(rs));
                 }
+                return list;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new DataAccessException("商品の検索に失敗しました", e);
         }
-        return productList;
     }
 
-    //単一商品の取得
-    public Product findById(int productId) {
-        Product product = null;
-        String sql = "SELECT PRODUCT_ID, NAME, CATEGORY, KIND, TONE, PRICE, SPEC, DESCRIPTION FROM PRODUCTS WHERE PRODUCT_ID = ?";
-
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-             PreparedStatement pStmt = conn.prepareStatement(sql)) {
-
-            pStmt.setInt(1, productId);
-
-            try (ResultSet rs = pStmt.executeQuery()) {
-                if (rs.next()) {
-                    List<Product.Spec> specs = findSpecsByProductId(conn, productId);
-                    product = createProductFromRs(rs, specs);
-                }
+    /** 見つからなければ null。 */
+    public Product findById(int id) {
+        String sql = "SELECT " + COLUMNS + " FROM products WHERE id = ?";
+        try (Connection c = Database.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? map(rs) : null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new DataAccessException("商品の取得に失敗しました", e);
         }
-        return product;
     }
 
-    private List<Product.Spec> findSpecsByProductId(Connection conn, int productId) throws SQLException {
-        List<Product.Spec> specs = new ArrayList<>();
-        String sql = "SELECT SPEC_LABEL, SPEC_VALUE FROM PRODUCT_SPECS WHERE PRODUCT_ID = ?";
+    /** 初期データ投入用。呼び出し側の接続・トランザクションの中で実行する。 */
+    static void insertAll(Connection c, List<Product> products) throws SQLException {
+        String sql = "INSERT INTO products (" + COLUMNS + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = c.prepareStatement(sql)) {
+            for (Product p : products) {
+                ps.setInt(1, p.getId());
+                ps.setString(2, p.getName());
+                ps.setString(3, p.getCategory());
+                ps.setString(4, p.getKind());
+                ps.setInt(5, p.getTone());
+                ps.setInt(6, p.getPrice());
+                ps.setString(7, p.getSpec());
+                ps.setString(8, p.getDescription());
+                ps.setString(9, encodeSpecs(p.getSpecs()));
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
 
-        try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
-            pStmt.setInt(1, productId);
-            try (ResultSet rs = pStmt.executeQuery()) {
-                while (rs.next()) {
-                    String label = rs.getString("SPEC_LABEL");
-                    String value = rs.getString("SPEC_VALUE");
-                    specs.add(new Product.Spec(label, value));
-                }
+    private static Product map(ResultSet rs) throws SQLException {
+        return new Product(
+            rs.getInt("id"),
+            rs.getString("name"),
+            rs.getString("category"),
+            rs.getString("kind"),
+            rs.getInt("tone"),
+            rs.getInt("price"),
+            rs.getString("spec"),
+            rs.getString("description"),
+            decodeSpecs(rs.getString("specs")));
+    }
+
+    // スペック表は「ラベル<TAB>値」を改行でつないだ1つの文字列として保存する
+    private static String encodeSpecs(List<Spec> specs) {
+        StringBuilder sb = new StringBuilder();
+        for (Spec s : specs) {
+            if (sb.length() > 0) {
+                sb.append('\n');
+            }
+            sb.append(s.getLabel()).append('\t').append(s.getValue());
+        }
+        return sb.toString();
+    }
+
+    private static List<Spec> decodeSpecs(String text) {
+        List<Spec> list = new ArrayList<>();
+        if (text == null || text.isEmpty()) {
+            return list;
+        }
+        for (String line : text.split("\n")) {
+            int tab = line.indexOf('\t');
+            if (tab > 0) {
+                list.add(new Spec(line.substring(0, tab), line.substring(tab + 1)));
             }
         }
-        return specs;
+        return list;
     }
 
-    //ResultSetの現在行からProductインスタンスを生成する共通ヘルパーメソッド
-    private Product createProductFromRs(ResultSet rs, List<Product.Spec> specs) throws SQLException {
-        int id = rs.getInt("PRODUCT_ID");
-        String name = rs.getString("NAME");
-        String category = rs.getString("CATEGORY");
-        String kind = rs.getString("KIND");
-        int tone = rs.getInt("TONE");
-        int price = rs.getInt("PRICE");
-        String spec = rs.getString("SPEC");
-        String description = rs.getString("DESCRIPTION");
-
-        return new Product(id, name, category, kind, tone, price, spec, description, specs);
+    private static String escapeLike(String s) {
+        return s.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
     }
 }

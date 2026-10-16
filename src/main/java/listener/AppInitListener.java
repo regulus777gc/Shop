@@ -4,7 +4,7 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-import org.h2.engine.Database;
+import dao.Database;
 
 /** アプリ起動時に1回だけ、データベースを準備する。 */
 @WebListener
@@ -19,6 +19,6 @@ public class AppInitListener implements ServletContextListener {
         if (url == null || url.trim().isEmpty()) {
             url = DEFAULT_URL;
         }
-        Database.int(url);
+        Database.init(url);
     }
 }
