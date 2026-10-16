@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MORI MARKET</title>
 </head>
 <body>
-
+<ul>
+<li><a href="&{pageContext.request.contextPath}/products">購入ページはこちら</a></li>
+</ul>
 </body>
 </html>
