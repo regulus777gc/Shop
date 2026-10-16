@@ -10,10 +10,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css">
 </head>
 <body>
-<% List<String> cart = (List<String>)request.getAttribute("cart"); %>
-<% for(String 変数２: cart) { %>
-        <%= 変数２ %><br>
-    <% } %>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<main class="main">

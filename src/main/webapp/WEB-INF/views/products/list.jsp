@@ -10,16 +10,16 @@
 <title>商品一覧</title>
 </head>
  <!--　ヘッダー　-->
-   <body id="top"
+   <body id="top">
         <header class="header">
                 <ul>
                     <li><a href="show.jsp">カート</a></li>
                 </ul>
-            </nav>
         </header>
         <!--ヘッダーここまで-->
->
+    </body>
 <main>
+
 <div class="items">
                 <div class="item">
                     <img src="" alt="">
@@ -35,6 +35,7 @@
                         </form>
                     </p>
                 </div>
+                
                 <div class="item">
                     <img src="" alt="">
                     <p>
@@ -49,6 +50,7 @@
                         </form>
                     </p>
                 </div>
+                
                 <div class="item">
                     <img src="" alt="">
                     <p>
@@ -62,6 +64,7 @@
                         </form>
                     </p>
                 </div>
+                
                 <div class="item">
                     <img src="" alt="">
                     <p>
@@ -75,20 +78,7 @@
                         </form>
                     </p>
                 </div>
-                <div class="item">
-                    <img src="" alt="">
-                    <p>
-                        <form action="CartServlet" method="post">
-                        <c:out value="${Product,name}"/><br>
-                        <strong><c:out value="${Product,price}"/></strong>
-                        <input type="hidden" name="add" value="abb">
-                        <input type="hidden" name="name" value="${Product,name}">
-                        <input type="hidden" name="price" value="${Product,price}">
-                        <input type="hidden" name="id" value="${Product,id}"
-                        <input type="submit" value="カートに追加">カートに追加する<br>
-                        </form>
-                    </p>
-                </div>
+                
                 <div class="item">
                     <img src="" alt="">
                     <p>
@@ -103,6 +93,22 @@
                         </form>
                     </p>
                 </div>
+                
+                <div class="item">
+                    <img src="" alt="">
+                    <p>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,name}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="hidden" name="id" value="${Product,id}"
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
+                    </p>
+                </div>
+                
                 <div class="item">
                     <img src="" alt="">
                     <p>
@@ -117,6 +123,7 @@
                         </form>
                     </p>
                 </div>
+                
                 <div class="item">
                     <img src="" alt="">
                     <p>
@@ -131,10 +138,11 @@
                         </form>
                     </p>
                 </div>
-            </div>
+</div>
+
 </main>
 
-<footer>
+        <footer>
             <div class="gotop">
                 <a href="#top"><img src="" alt="ページトップへ戻る"></a>
             </div>
@@ -142,4 +150,5 @@
         
         </footer>
 </body>
+
 </html>
