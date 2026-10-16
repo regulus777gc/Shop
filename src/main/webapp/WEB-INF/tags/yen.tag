@@ -1,4 +1,6 @@
-<%@ tag language="java" pageEncoding="UTF-8" body-content="empty" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ attribute name="value" required="true" type="java.lang.Integer" %>
-¥<fmt:formatNumber value="${value}" pattern="#,##0"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+¥<fmt:formatNumber value="${value}" pattern="#,###" />
