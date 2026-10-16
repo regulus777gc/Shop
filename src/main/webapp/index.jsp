@@ -9,7 +9,7 @@
 </head>
 <body>
 <ul>
-<li><a href="&{pageContext.request.contextPath}/products">購入ページはこちら</a></li>
+<li><a href="&{products}/products">購入ページはこちら</a></li>
 </ul>
 </body>
 </html>
