@@ -28,7 +28,7 @@ public class ProductListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String category = Views.param(request,"category");
 		String q = Views.param(request,"q");
-		String sort = Views.param(req, "sort");
+		String sort = Views.param(request, "sort");
 		
 	      List<Product> products = productDao.search(category, q, sort);
 

@@ -8,8 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.example.shop.dao.ProductDao;
-
+import dao.ProductDAO;
 import model.Cart;
 import model.Product;
 
@@ -22,7 +21,7 @@ import model.Product;
 public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private final ProductDao productDao = new ProductDao();
+    private final ProductDAO productDao = new ProductDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
