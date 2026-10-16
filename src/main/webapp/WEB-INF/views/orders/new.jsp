@@ -8,7 +8,7 @@
 <title>お届け先の入力</title>
 </head>
 <body>
-<form action="LoginServlet" method="post">
+<form action="OrderServlet" method="post">
 郵便番号:<input type="text" name="zip" ><br>
 住所:<input type="text" name="address" ><br>
 <input type="submit" value="登録">

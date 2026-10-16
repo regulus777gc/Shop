@@ -22,66 +22,107 @@
 <main>
 <div class="items">
                 <div class="item">
-                    <img src="ここに画像" alt="ここに商品の名前">
+                    <img src="" alt="">
                     <p>
+                        <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
-                        <strong>ここに商品の金額</strong>
+                        <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                         <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                       <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
                 <div class="item">
                     <img src="" alt="">
                     <p>
-                         <c:out value="${Product,name}"/><br>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
-                    </p>
-                </div>
-                <div class="item">
-                    <img src="" alt="">
-                    <p>
-                         <c:out value="${Product,name}"/><br>
-                        <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,price}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
                     </p>
                 </div>
             </div>
