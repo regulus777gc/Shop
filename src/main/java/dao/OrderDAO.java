@@ -96,6 +96,48 @@ public class OrderDAO {
         }
     }
 
+    /** 注文番号から1件取得する。見つからなければ null。 */
+    public Order findByOrderNo(String orderNo) {
+        String selectOrderSql = "SELECT ORDER_NO, NAME, EMAIL, ZIP, ADDRESS, SUBTOTAL, SHIPPING, TOTAL, CREATED_AT FROM ORDERS WHERE ORDER_NO = ?";
+        String selectItemsSql = "SELECT PRODUCT_NAME, UNIT_PRICE, QUANTITY FROM ORDER_ITEMS WHERE ORDER_NO = ?";
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+             PreparedStatement pStmtOrder = conn.prepareStatement(selectOrderSql)) {
+
+            pStmtOrder.setString(1, orderNo);
+
+            try (ResultSet rs = pStmtOrder.executeQuery()) {
+                if (!rs.next()) {
+                    return null;
+                }
+                Customer customer = new Customer();
+                customer.setName(rs.getString("NAME"));
+                customer.setEmail(rs.getString("EMAIL"));
+                customer.setZip(rs.getString("ZIP"));
+                customer.setAddress(rs.getString("ADDRESS"));
+
+                List<OrderItem> itemList = new ArrayList<>();
+                try (PreparedStatement pStmtItem = conn.prepareStatement(selectItemsSql)) {
+                    pStmtItem.setString(1, orderNo);
+                    try (ResultSet rsItem = pStmtItem.executeQuery()) {
+                        while (rsItem.next()) {
+                            itemList.add(new OrderItem(
+                                    rsItem.getString("PRODUCT_NAME"),
+                                    rsItem.getInt("UNIT_PRICE"),
+                                    rsItem.getInt("QUANTITY")));
+                        }
+                    }
+                }
+                return new Order(rs.getString("ORDER_NO"), customer,
+                        rs.getInt("SUBTOTAL"), rs.getInt("SHIPPING"), rs.getInt("TOTAL"),
+                        rs.getString("CREATED_AT"), itemList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * メールアドレスから注文履歴・検索結果を取得する
      */

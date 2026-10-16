@@ -19,6 +19,6 @@ public class AppInitListener implements ServletContextListener {
         if (url == null || url.trim().isEmpty()) {
             url = DEFAULT_URL;
         }
-        Database.init(url);
+        Database.int(url);
     }
 }
