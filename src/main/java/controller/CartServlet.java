@@ -12,11 +12,6 @@ import dao.ProductDAO;
 import model.Cart;
 import model.Product;
 
-/**
- * Controller: カート。
- * GET  /cart                         … カートの表示
- * POST /cart  action=add|update|remove … 追加・数量変更・削除（終わったら /cart へリダイレクト）
- */
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
