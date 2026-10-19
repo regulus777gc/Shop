@@ -9,7 +9,7 @@
 </head>
 <body>
 <ul>
-<li><a href="list.jsp">購入ページはこちら</a></li>
+<li><a href="/WEB-INF/views/products/list.jsp">商品一覧はこちらです</a></li>
 </ul>
 </body>
 </html>
