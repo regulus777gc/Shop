@@ -5,10 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>エラーメッセージ</title>
+<title>404　ページが見つかりません</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<p>エラーが発生しました</p>
-<a href="header.jsp">トップへ戻る</a>
+    <div class="error-container">
+    <h1>お探しのページが見つかりません</h1>
+    <p>
+        お探しのページは、移動または削除されたか、<br>
+        URLに誤りがある可能性があります。<br>
+        お手数ですが、トップページより再度お探しください。<br>
+    </p>
+    <a href="header.jsp">トップへ戻る</a>
+    </div>
 </body>
 </html>

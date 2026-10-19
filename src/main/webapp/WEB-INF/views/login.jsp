@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="404.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +8,10 @@
 </head>
 <body>
 <form action="LoginServlet" method="post">
-ユーザーID:<input type="text" name="userId"><br>
-パスワード:<input type="password" name="pass" ><br>
+名前:<input type="text" name="name"><br>
+メールアドレス:<input type="text" name="email" ><br>
 <input type="submit" value="ログイン">
-<p>初めての方はこちら<a href="ここに新規登録">新規登録</a></p>
+<p>初めての方はこちら<a href="newAccount.jsp">新規登録</a></p>
 </form>
 </body>
 </html>
