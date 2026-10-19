@@ -22,13 +22,9 @@ public class UserDAO {
     private static final String PREFIX = "pbkdf2_sha256";
     private static final int ITERATIONS = 600_000;
     private static final SecureRandom RANDOM = new SecureRandom();
-    // ユーザーが存在しないときにも同じだけ時間をかけるためのダミー（RANDOM より後に宣言すること）
+    // ユーザーが存在しないときにも同じだけ時間をかけるためのダミー
     private static final String DUMMY = hash("dummy-password");
 
-    /**
-     * メールアドレスとパスワードを確認する。
-     * 一致すれば User、一致しなければ null。DBエラーは DataAccessException。
-     */
     public User authenticate(String email, String password) {
         String sql = "SELECT id, name, email, password_hash FROM users WHERE LOWER(email) = ?";
 
@@ -52,7 +48,7 @@ public class UserDAO {
         }
     }
 
-    /** パスワードを保存用の文字列にする（Database のデモユーザー作成でも使う）。 */
+    /* パスワードを保存用の文字列にする */
     static String hash(String password) {
         byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
