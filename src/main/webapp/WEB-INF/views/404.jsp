@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>404　ページが見つかりません</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css">
 </head>
 <body>
     <div class="error-container">
@@ -16,7 +16,7 @@
         URLに誤りがある可能性があります。<br>
         お手数ですが、トップページより再度お探しください。<br>
     </p>
-    <a href="header.jsp">トップへ戻る</a>
+    <a href="${pageContext.request.contextPath}/products">トップへ戻る</a>
     </div>
 </body>
 </html>

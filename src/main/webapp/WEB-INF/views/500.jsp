@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>500 システムエラー</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/style.css">
 </head>
 <body>
 <div class="error-container">
@@ -23,7 +23,7 @@
             <strong>エラー詳細</strong>
         </div>
         <% } %>
-    <a href="header.jsp">トップへ戻る</a>
+    <a href="${pageContext.request.contextPath}/products">トップへ戻る</a>
     </div>
 </body>
 </html>
