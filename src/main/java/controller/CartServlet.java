@@ -8,19 +8,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import dao.ProductDAO;
 import model.Cart;
 import model.Product;
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-<<<<<<< HEAD
-    private final ProductDAO productDao = new ProductDAO();
-=======
-    private final ProductDAO productDAO = new ProductDAO();
->>>>>>> branch 'master' of https://github.com/regulus777gc/Shop.git
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
