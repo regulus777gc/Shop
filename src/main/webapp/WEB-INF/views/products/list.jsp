@@ -22,7 +22,7 @@
 
 <div class="items">
                 <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/エチオピア　イルガチェフェ.png" alt="エチオピア　イルガチェフェ">
                     <p>
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
@@ -37,7 +37,7 @@
                 </div>
                 
                 <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/エスプレッソブレンド.png" alt="エスプレッソブレンド">
                     <p>
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
@@ -52,7 +52,7 @@
                 </div>
                 
                 <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/キリマンジャロ　AA.png" alt="キリマンジャロ　AA">
                     <p>
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
@@ -66,7 +66,7 @@
                 </div>
                 
                 <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/グアテマラ　アンティグア.png" alt="グアテマラ　アンティグア">
                     <p>
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
@@ -80,22 +80,7 @@
                 </div>
                 
                 <div class="item">
-                    <img src="" alt="">
-                    <p>
-                        <form action="CartServlet" method="post">
-                        <c:out value="${Product,name}"/><br>
-                        <strong><c:out value="${Product,price}"/></strong>
-                        <input type="hidden" name="add" value="abb">
-                        <input type="hidden" name="name" value="${Product,name}">
-                        <input type="hidden" name="price" value="${Product,price}">
-                        <input type="hidden" name="id" value="${Product,id}">
-                        <input type="submit" value="カートに追加">カートに追加する<br>
-                        </form>
-                    </p>
-                </div>
-                
-                <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/コロンビア　デカフェ.png" alt="コロンビア　デカフェ">
                     <p>
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
@@ -110,7 +95,22 @@
                 </div>
                 
                 <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/ハウスブレンド.png" alt="ハウスブレンド">
+                    <p>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,name}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="hidden" name="id" value="${Product,id}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
+                    </p>
+                </div>
+                
+                <div class="item">
+                    <img src="/imags/ブラジル　サントス.png" alt="ブラジル　サントス">
                     <p>
                        <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
@@ -125,7 +125,22 @@
                 </div>
                 
                 <div class="item">
-                    <img src="" alt="">
+                    <img src="/imags/ブルーマウンテン　No.1.png" alt="ブルーマウンテン　No.1">
+                    <p>
+                        <form action="CartServlet" method="post">
+                        <c:out value="${Product,name}"/><br>
+                        <strong><c:out value="${Product,price}"/></strong>
+                        <input type="hidden" name="add" value="abb">
+                        <input type="hidden" name="name" value="${Product,name}">
+                        <input type="hidden" name="price" value="${Product,price}">
+                        <input type="hidden" name="id" value="${Product,id}">
+                        <input type="submit" value="カートに追加">カートに追加する<br>
+                        </form>
+                    </p>
+                </div>
+                
+                <div class="item">
+                    <img src="/imags/マンデリン.png" alt="マンデリン">
                     <p>
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
