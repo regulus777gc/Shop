@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import model.User; 
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import dao.ProductDAO;          // ← ① 追加
 import model.Cart;
 import model.Product;
 
@@ -15,15 +16,10 @@ import model.Product;
 public class CartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.setAttribute("cart", Views.cartOf(req));
-        Views.forward(req, resp, "cart/show");
-    }
+    private final ProductDAO productDAO = new ProductDAO();   // ← ② 追加
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Cart cart = Views.cartOf(req);
         Integer productId = Views.intParam(req, "productId");
