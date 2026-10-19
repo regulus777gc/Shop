@@ -27,6 +27,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/エチオピア　イルガチェフェ.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
@@ -42,6 +43,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/エスプレッソブレンド.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
@@ -57,6 +59,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/キリマンジャロ　AA.jsp">商品説明</a>
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
                         <input type="hidden" name="id" value="${Product,id}">
@@ -71,6 +74,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/グアテマラ　アンティグア.jsp">商品説明</a>
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
                         <input type="hidden" name="id" value="${Product,id}">
@@ -85,6 +89,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/コロンビア　デカフェ.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
@@ -100,6 +105,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/ハウスブレンド.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
@@ -115,6 +121,7 @@
                        <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/ブラジル　サントス.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
@@ -130,6 +137,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/ブルーマウンテン　No.1.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
@@ -145,6 +153,7 @@
                         <form action="CartServlet" method="post">
                         <c:out value="${Product,name}"/><br>
                         <strong><c:out value="${Product,price}"/></strong>
+                        <a href="/WEB-INF/views/products/details/マンデリン.jsp">商品説明</a>
                         <input type="hidden" name="add" value="abb">
                         <input type="hidden" name="name" value="${Product,name}">
                         <input type="hidden" name="price" value="${Product,price}">
