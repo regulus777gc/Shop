@@ -11,7 +11,7 @@ import dao.Database;
 public class AppInitListener implements ServletContextListener {
 
     // ~ はH2が「ユーザーのホームフォルダ」に読み替える
-    private static final String DEFAULT_URL = "jdbc:h2:file:~/mamedogu-db/shop";
+    private static final String DEFAULT_URL = "jdbc:h2:tcp://10.23.104.249/~/User";
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
